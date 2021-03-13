@@ -20,6 +20,15 @@
      import * as THREE from "https://unpkg.com/three/build/three.module.js";
      import { VRButton } from "https://unpkg.com/three/examples/jsm/webxr/VRButton.js";
 
+     function theLight( scene ) {
+         const light = new THREE.DirectionalLight( 0xFFFFFF, 1.0 );
+         light.position.set( 0, 10, 0 );
+         light.target.position.set( -5, 0, 0 );
+         scene.add( light );
+         scene.add( light.target );
+         scene.add( new THREE.AmbientLight( 0xFFFFFF, 0.2 ) );
+     }
+
      // Function for making the camrea.
      function theCamera() {
          const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -40,7 +49,7 @@
      function theCube() {
          return new THREE.Mesh(
              new THREE.BoxGeometry(),
-             new THREE.MeshBasicMaterial( { color: 0x00ff00 } )
+             new THREE.MeshPhongMaterial( { color: 0xff0000 } )
          );
      }
 
@@ -48,6 +57,9 @@
      const scene = new THREE.Scene();
      const camera = theCamera();
      const renderer = theRenderer()
+
+     // Add some light to the scene.
+     theLight( scene );
 
      // Add the cube to the scene.
      const cube = theCube();
