@@ -46,7 +46,7 @@
 
          const controllerModelFactory = new XRControllerModelFactory();
 
-	 const controllerGrip = renderer.xr.getControllerGrip( 0 );
+	 const controllerGrip = renderer.xr.getControllerGrip( id );
 	 controllerGrip.add( controllerModelFactory.createControllerModel( controllerGrip ) );
 	 scene.add( controllerGrip );
      }
