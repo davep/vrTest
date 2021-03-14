@@ -48,7 +48,7 @@
      // Function for making the cube.
      function theCube() {
          return new THREE.Mesh(
-             new THREE.BoxGeometry(),
+             new THREE.BoxGeometry( 0.5, 0.5, 0.5 ),
              new THREE.MeshPhongMaterial( { color: 0xff0000 } )
          );
      }
