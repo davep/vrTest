@@ -46,17 +46,17 @@
 
          const controllerModelFactory = new XRControllerModelFactory();
 
-	 const controllerGrip = renderer.xr.getControllerGrip( id );
-	 controllerGrip.add( controllerModelFactory.createControllerModel( controllerGrip ) );
-	 scene.add( controllerGrip );
+         const controllerGrip = renderer.xr.getControllerGrip( id );
+         controllerGrip.add( controllerModelFactory.createControllerModel( controllerGrip ) );
+         scene.add( controllerGrip );
      }
 
      // Oh hi Mark!
      function theRoom() {
          return new THREE.LineSegments(
-	     new BoxLineGeometry( 6, 6, 6, 10, 10, 10 ).translate( 0, 3, 0 ),
-	     new THREE.LineBasicMaterial( { color: 0xFFFF00 } )
-	 );
+             new BoxLineGeometry( 6, 6, 6, 10, 10, 10 ).translate( 0, 3, 0 ),
+             new THREE.LineBasicMaterial( { color: 0xFFFF00 } )
+         );
      }
 
      // Function for making the renderer.
@@ -105,7 +105,7 @@
      renderer.setAnimationLoop( () => {
          cube.rotation.x += 0.01;
          cube.rotation.y += 0.01;
-	 renderer.render( scene, camera );
+         renderer.render( scene, camera );
      } );
 
     </script>
