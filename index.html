@@ -97,11 +97,12 @@
      theLight( scene );
 
      // Create a room to stand in.
-     scene.add( theRoom() );
+     const room = theRoom();
+     scene.add( room );
 
-     // Add the cube to the scene.
+     // Add the cube to the room.
      const cube = theCube();
-     scene.add( cube );
+     room.add( cube );
 
      // Add the button that lets people switch into VR.
      document.body.appendChild( VRButton.createButton( renderer ) );
