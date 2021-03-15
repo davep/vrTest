@@ -74,14 +74,29 @@
      }
 
      // Function for making the cube.
-     function theCube() {
+     function theCube( xOffset, yOffset ) {
          const cube = new THREE.Mesh(
              new THREE.BoxGeometry( 0.5, 0.5, 0.5 ),
              new THREE.MeshPhongMaterial( { color: 0xff0000 } )
          );
-         cube.position.y = 1;
+         cube.position.x = xOffset;
+         cube.position.y = yOffset;
          cube.position.z = -0.5;
+         cube.userData.rotation = {
+             "x": ( Math.random() - 0.5 ) / 10,
+             "y": ( Math.random() - 0.5 ) / 10,
+             "z": ( Math.random() - 0.5 ) / 10
+         };
          return cube;
+     }
+
+     // Update the rotations of all the objects in the room.
+     function rotateObjectsIn( room ) {
+         for ( let cube of room.children ) {
+             cube.rotation.x += cube.userData.rotation.x;
+             cube.rotation.y += cube.userData.rotation.y;
+             cube.rotation.z += cube.userData.rotation.z;
+         }
      }
 
      // Create the things that will help make the scene.
@@ -100,17 +115,19 @@
      const room = theRoom();
      scene.add( room );
 
-     // Add the cube to the room.
-     const cube = theCube();
-     room.add( cube );
+     // Add some cubes to the room.
+     for ( let x = -1; x < 2; x++ ) {
+         for ( let y = 1; y < 4; y++ ) {
+             room.add( theCube( x,y ) );
+         }
+     }
 
      // Add the button that lets people switch into VR.
      document.body.appendChild( VRButton.createButton( renderer ) );
 
      // Animation loop.
      renderer.setAnimationLoop( () => {
-         cube.rotation.x += 0.01;
-         cube.rotation.y += 0.01;
+         rotateObjectsIn( room );
          renderer.render( scene, camera );
      } );
 
