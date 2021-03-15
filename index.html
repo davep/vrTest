@@ -77,7 +77,7 @@
      function theCube( xOffset, yOffset ) {
          const cube = new THREE.Mesh(
              new THREE.BoxGeometry( 0.5, 0.5, 0.5 ),
-             new THREE.MeshPhongMaterial( { color: 0xff0000 } )
+             new THREE.MeshPhongMaterial( { color: Math.floor( Math.random() * 0xFFFF00 ) } )
          );
          cube.position.x = xOffset;
          cube.position.y = yOffset;
@@ -96,6 +96,13 @@
              cube.rotation.x += cube.userData.rotation.x;
              cube.rotation.y += cube.userData.rotation.y;
              cube.rotation.z += cube.userData.rotation.z;
+         }
+     }
+
+     // Bump the colour of each object.
+     function bumpObjectColoursIn( room ) {
+         for ( let cube of room.children ) {
+             cube.material.color.set( cube.material.color.getHex() === 0xFFFFFF ? 0 : cube.material.color.getHex() + 1 );
          }
      }
 
@@ -128,6 +135,7 @@
      // Animation loop.
      renderer.setAnimationLoop( () => {
          rotateObjectsIn( room );
+         bumpObjectColoursIn( room );
          renderer.render( scene, camera );
      } );
 
