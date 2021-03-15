@@ -24,12 +24,17 @@
 
      // Add some light to the scene.
      function theLight( scene ) {
+
+         // First off, add some ambient light to lift everything.
+         scene.add( new THREE.AmbientLight( 0xFFFFFF, 0.2 ) );
+
+         // Next, add a directional light to give a little bit of contrast
+         // to different surfaces.
          const light = new THREE.DirectionalLight( 0xFFFFFF, 1.0 );
          light.position.set( 0, 10, 0 );
          light.target.position.set( -5, 0, 0 );
          scene.add( light );
          scene.add( light.target );
-         scene.add( new THREE.AmbientLight( 0xFFFFFF, 0.2 ) );
      }
 
      // Function for making the camrea.
